@@ -49,22 +49,38 @@ $lulusan = mysqli_fetch_array($data1);
 	<div class="box">
 		<div class="box-form">
 			<div class="kotakmm">
-				<img src="https://img.icons8.com/material-rounded/64/ffffff/frame-rate.png"/>
-				<h4><?php echo $jurusan['MM'];?></h4>
+				<img src="https://img.icons8.com/material-rounded/64/ffffff/frame-rate.png" />
+				<h4><?php echo $jurusan['MM']; ?></h4>
 				<h5>MULTIMEDIA</h5>
 			</div>
 			<div class="kotakrpl">
-				<img src="https://img.icons8.com/material-rounded/64/ffffff/code.png"/>
-				<h4><?php echo $jurusan['RPL'];?></h4>
+				<img src="https://img.icons8.com/material-rounded/64/ffffff/code.png" />
+				<h4><?php echo $jurusan['RPL']; ?></h4>
 				<h5>REKAYASA PERANGKAT LUNAK</h5>
 			</div>
 			<div class="kotaktkj">
-				<img src="https://img.icons8.com/material-rounded/64/ffffff/networking-manager.png"/>
-				<h4><?php echo $jurusan['TKJ'];?></h4>
+				<img src="https://img.icons8.com/material-rounded/64/ffffff/networking-manager.png" />
+				<h4><?php echo $jurusan['TKJ']; ?></h4>
 				<h5>TEKNIK KOMPUTER JARINGAN</h5>
+			</div>
+			<div class="kotaktav">
+				<img src="https://img.icons8.com/external-kiranshastry-solid-kiranshastry/64/ffffff/external-radio-advertising-kiranshastry-solid-kiranshastry-1.png" />
+				<h4><?php echo $jurusan['TAV']; ?></h4>
+				<h5>TEKNIK AUDIO VIDEO</h5>
+			</div>
+			<div class="kotaktitl">
+				<img src="https://img.icons8.com/pastel-glyph/64/ffffff/electricity.png" />
+				<h4><?php echo $jurusan['TITL']; ?></h4>
+				<h5>TEKNIK INSTALASI TENAGA LISTRIK</h5>
+			</div>
+			<div class="kotaktoi">
+				<img src="https://img.icons8.com/external-others-made-by-made/50/ffffff/external-electric-electricity-others-made-by-made-18.png" />
+				<h4><?php echo $jurusan['TOI']; ?></h4>
+				<h5>TEKNIK OTOMASI INDUSTRI</h5>
 			</div>
 		</div>
 	</div>
+
 
 	<div class="container">
 		<div class="box-form">
@@ -76,99 +92,99 @@ $lulusan = mysqli_fetch_array($data1);
 		</div>
 	</div>
 
-	
+
 </body>
 
 </html>
 
 <script>
-		const ctx = document.getElementById('jurusan');
-		const jurusan = new Chart(ctx, {
-			type: 'doughnut',
-			data: {
-				labels: ['Multimedia', 'Rekayasa Perangkat Lunak', 'Teknik Komputer dan Jaringan', 'Teknik Audio Video', 'Teknik Instalasi Tenaga Listrik', 'Teknik Otomasi Industri'],
-				datasets: [{
-					label: 'Jumlah ',
-					data: [<?php echo $jurusan['MM']; ?>, <?php echo $jurusan['RPL']; ?>, <?php echo $jurusan['TKJ']; ?>, <?php echo $jurusan['TAV']; ?>, <?php echo $jurusan['TITL']; ?>, <?php echo $jurusan['TOI']; ?>],
-					backgroundColor: [
-						'#5F27CD',
-						'#1DD1A1',
-						'#EE5253',
-						'#FECA57',
-						'#54A0FF',
-						'#94A3B3'
-					],
-				}],
-			},
-			options: {
-				responsive: true,
-				color: '#222831',
-				borderWidth: 0,
-				plugins: {
-					legend: {
-						position: 'bottom',
-						align: 'center',
-						labels: {
+	const ctx = document.getElementById('jurusan');
+	const jurusan = new Chart(ctx, {
+		type: 'doughnut',
+		data: {
+			labels: ['Multimedia', 'Rekayasa Perangkat Lunak', 'Teknik Komputer dan Jaringan', 'Teknik Audio Video', 'Teknik Instalasi Tenaga Listrik', 'Teknik Otomasi Industri'],
+			datasets: [{
+				label: 'Jumlah ',
+				data: [<?php echo $jurusan['MM']; ?>, <?php echo $jurusan['RPL']; ?>, <?php echo $jurusan['TKJ']; ?>, <?php echo $jurusan['TAV']; ?>, <?php echo $jurusan['TITL']; ?>, <?php echo $jurusan['TOI']; ?>],
+				backgroundColor: [
+					'#5F27CD',
+					'#1DD1A1',
+					'#EE5253',
+					'#FECA57',
+					'#54A0FF',
+					'#94A3B3'
+				],
+			}],
+		},
+		options: {
+			responsive: true,
+			color: '#222831',
+			borderWidth: 0,
+			plugins: {
+				legend: {
+					position: 'bottom',
+					align: 'center',
+					labels: {
 
-						}
-					},
-					title: {
-						display: true,
-						text: 'Grafik Jumlah Alumni Berdasarkan Jurusan',
-						color: '#222831',
-						font: {
-							size: 20,
-						},
-						margin:{
-							bottom: 10,
-						}
-					},
+					}
 				},
-			}
-		});
-	</script>
+				title: {
+					display: true,
+					text: 'Grafik Jumlah Alumni Berdasarkan Jurusan',
+					color: '#222831',
+					font: {
+						size: 20,
+					},
+					margin: {
+						bottom: 10,
+					}
+				},
+			},
+		}
+	});
+</script>
 
 <script>
-		const ctx1 = document.getElementById('lulusan');
-		const lulusan = new Chart(ctx1, {
-			type: 'doughnut',
-			data: {
-				labels: ['Bekerja', 'Kuliah', 'Wirausaha', 'Tidak Bekerja Ataupun Kuliah'],
-				datasets: [{
-					label: 'Jumlah ',
-					data: [<?php echo $lulusan['kerja']; ?>, <?php echo $lulusan['kuliah']; ?>, <?php echo $lulusan['usaha']; ?>, <?php echo $lulusan['none']; ?>],
-					backgroundColor: [
-						'#263238',
-						'#726170',
-						'#AA94A7',
-						'#C4C4C4',
-					],
-				}],
-			},
-			options: {
-				responsive: true,
-				color: '#222831',
-				borderWidth: 0,
-				plugins: {
-					legend: {
-						position: 'bottom',
-						align: 'center',
-						labels: {
+	const ctx1 = document.getElementById('lulusan');
+	const lulusan = new Chart(ctx1, {
+		type: 'doughnut',
+		data: {
+			labels: ['Bekerja', 'Kuliah', 'Wirausaha', 'Tidak Bekerja Ataupun Kuliah'],
+			datasets: [{
+				label: 'Jumlah ',
+				data: [<?php echo $lulusan['kerja']; ?>, <?php echo $lulusan['kuliah']; ?>, <?php echo $lulusan['usaha']; ?>, <?php echo $lulusan['none']; ?>],
+				backgroundColor: [
+					'#263238',
+					'#726170',
+					'#AA94A7',
+					'#C4C4C4',
+				],
+			}],
+		},
+		options: {
+			responsive: true,
+			color: '#222831',
+			borderWidth: 0,
+			plugins: {
+				legend: {
+					position: 'bottom',
+					align: 'center',
+					labels: {
 
-						}
-					},
-					title: {
-						display: true,
-						text: 'Grafik Jumlah Alumni Berdasarkan Lulusan',
-						color: '#222831',
-						font: {
-							size: 20,
-						},
-						margin:{
-							bottom: 10,
-						}
-					},
+					}
 				},
-			}
-		});
-	</script>
+				title: {
+					display: true,
+					text: 'Grafik Jumlah Alumni Berdasarkan Lulusan',
+					color: '#222831',
+					font: {
+						size: 20,
+					},
+					margin: {
+						bottom: 10,
+					}
+				},
+			},
+		}
+	});
+</script>

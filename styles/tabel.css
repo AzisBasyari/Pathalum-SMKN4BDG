@@ -1,12 +1,12 @@
 .table {
     background-color: white;
-    border: 3px solid #3182ce;
+    border: 1px solid #222831;
     margin: 0px;
 }
 
 .btn-masuk{
     height: 40px;
-    margin-right: 5px;
+    margin: 5px;
     background-color: #5392bb;
     border: 0;
 }

@@ -1,4 +1,4 @@
-.welcome-img{
+.welcome-img {
     height: 275px;
     width: 100%;
     top: 0;
@@ -7,9 +7,26 @@
     z-index: -10;
 }
 
-#student{
+#student {
     margin-left: auto;
     margin-right: auto;
     display: block;
     z-index: 2;
+}
+
+.card-text {
+    color: #222831;
+}
+
+.btn-link {
+    height: 40px;
+    background-color: #5392bb;
+    border: 0;
+    text-decoration: none;
+    color: #fff;
+}
+
+.btn-link:hover {
+    background-color: #2A4365;
+    color: #fff;
 }
