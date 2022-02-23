@@ -14,19 +14,50 @@
     z-index: 2;
 }
 
-.card-text {
+.title{
+    position: absolute;
+    z-index: 1;
+}
+
+.box-form{
+    position: relative;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, 10%);
+    background: #fff;
+    color: #222831;
+    padding: 40px 20px;
+    width: 90%;
+    border-radius: 10px;
+    border: 3px solid #222831;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}   
+
+.card{
+    width: 28%;
+    margin: 15px 15px;
+    margin-top: 75px;
+    background-color: #fff;
+    border: 2px solid #222831;
+    
+    
+}
+
+.card-title, .card-text, .card-footer {
     color: #222831;
 }
 
 .btn-link {
     height: 40px;
-    background-color: #5392bb;
+    background-color: #2A4365;
     border: 0;
     text-decoration: none;
     color: #fff;
 }
 
 .btn-link:hover {
-    background-color: #2A4365;
+    background-color: #222831;
     color: #fff;
 }

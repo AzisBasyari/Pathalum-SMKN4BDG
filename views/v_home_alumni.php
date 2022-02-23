@@ -6,7 +6,7 @@ $sql = "SELECT * FROM alumni, users where alumni.id_users = " . $user;
 $data = $mysqli->query($sql) or die($mysqli->error);
 $row = mysqli_fetch_array($data);
 
-$sql1 = "SELECT * FROM postingan";
+$sql1 = "SELECT * FROM users u, postingan p WHERE p.id_users = u.id_user ORDER BY tanggal_dibuat;";
 $data1 = $mysqli->query($sql1) or die($mysqli->error);
 ?>
 
@@ -45,29 +45,43 @@ $data1 = $mysqli->query($sql1) or die($mysqli->error);
         ?>
         <<?php echo $row['nama_lengkap'] == null ? "/h3" : "/h4"; ?> </div>
 
-            <?php
-            while ($postingan = mysqli_fetch_array($data1)) {
-            ?>
 
-                <div class="card" style="width: 20rem;">
-                    <img src="<?php echo $postingan['photo'] ?>" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title"><?php echo $postingan['judul_postingan'] ?></h5>
-                        <p class="card-text" style="color: #222831;">
-                            <?php
-                            $deskripsi = $postingan['deskripsi'];
-                            if (strlen($deskripsi) > 255) {
-                                echo substr_replace($deskripsi, "...", 255);
-                            }
-                            ?>
-                        </p>
-                        <a href="#" class="btn btn-primary btn-link">Read More...</a>
-                    </div>
+            <div class="box-form">
+                <div class="title">
+                    <h1>Postingan</h1>
                 </div>
+                <?php
+                while ($postingan = mysqli_fetch_array($data1)) {
+                ?>
 
-            <?php
-            }
-            ?>
+                    <div class="card">
+                        <img src="../assets/bg.jpeg" class="card-img-top" alt="Tidak Ada Gambar">
+                        <div class="card-body">
+                            <h5 class="card-title"><?php echo $postingan['judul_postingan'] ?></h5>
+                            <p class="card-text">
+                                <?php
+                                $deskripsi = $postingan['deskripsi'];
+                                if (strlen($deskripsi) > 100) {
+                                    echo substr_replace($deskripsi, "...", 100);
+                                }
+                                ?>
+                            </p>
+                            <a href="#" class="btn btn-primary btn-link">Read More...</a>
+                        </div>
+                        <div class="card-footer">
+                            <small>Created by: <?php echo $postingan['username']; ?></small>
+                            <small>on <?php echo $postingan['tanggal_dibuat']; ?></small>
+                        </div>
+                        <!-- <ul class="list-group list-group-flush">
+                            <li class="list-group-item"></li>
+                            <li class="list-group-item"></li>
+                        </ul> -->
+                    </div>
+
+                <?php
+                }
+                ?>
+            </div>
 </body>
 
 </html>
