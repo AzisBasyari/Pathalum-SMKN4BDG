@@ -1,0 +1,31 @@
+.box-form{  
+    max-width: 100%;
+    background: white;
+    margin:  auto;
+    padding: 20px;
+    color: #222831;
+    border-radius: 5px;
+}
+
+.box-form, h4, p{
+    color: #222831;
+    margin: 0;
+}
+
+.bg-2{
+    background-color: #2A4365 !important;
+}
+
+.btn-link {
+    background-color: #2A4365;
+    border: 0;
+    text-decoration: none;
+    color: #fff;
+    font-size: 0.9em;
+}
+
+.btn-link:hover {
+    background-color: #222831;
+    color: #fff;
+}
+

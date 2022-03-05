@@ -1,12 +1,3 @@
-<!-- 
-LIST TO DO ON HERE :
-- This file to create the fixed button and form
-- Getting data from form using the post method
-- Admin can post the title, context and media (photo or video) on form
--->                          
-                                <!-- READ THIS BEFORE RUN
-Make sure you have configure "php.ini" file on your xampp folder, search for 'file_uploads' and set it to 
-'On' like this 'file_uploads = On' -->
 <?php
 include '../lib/library.php';
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -83,7 +74,7 @@ include '../lib/library.php';
 <!-- ADMIN WILL SEE THE POSTS ON HERE -->
 <div class="main-container">
     <div class="title">    
-        <h2>Atur Postingan</h2>
+        <h2>Kelola Postingan</h2>
         <button type="button" class="btn btn-primary btn-tambah" data-bs-toggle="modal" data-bs-target="#adminaddpost">
             <img src="https://img.icons8.com/windows/32/000000/plus-math.png"/>
         </button>
@@ -95,11 +86,12 @@ include '../lib/library.php';
 			<th>Judul Postingan</th>
 			<th>Deskripsi</th>
             <th>Kategori</th>
-			<th>Pembuat</th>
 			<th>Tanggal</th>
 			<th>Aksi</th>
 		</tr>
 		<?php
+        $user = $_SESSION['id_user'];
+
         $batas = 5;
         $halaman = isset($_GET['halaman'])?(int)$_GET['halaman'] : 1;
         $halaman_awal = ($halaman>1) ? ($halaman * $batas) - $batas : 0;
@@ -107,13 +99,13 @@ include '../lib/library.php';
         $previous = $halaman - 1;
         $next = $halaman + 1;
 
-        $data = mysqli_query($mysqli,"select * from postingan");
+        $data = mysqli_query($mysqli,"select * from postingan WHERE id_users= $user");
 		$jumlah_data = mysqli_num_rows($data);
 		$total_halaman = ceil($jumlah_data / $batas);
 
 
         $no = $halaman_awal+1;;
-        $data_postingan = mysqli_query($mysqli, "SELECT * FROM users u, postingan p WHERE p.id_users = u.id_user LIMIT $halaman_awal, $batas");
+        $data_postingan = mysqli_query($mysqli, "SELECT * FROM users u, postingan p WHERE p.id_users = u.id_user AND u.id_user = $user LIMIT $halaman_awal, $batas");
         while ($d = mysqli_fetch_array($data_postingan)) {
             ?>
 			<tr>
@@ -128,7 +120,6 @@ include '../lib/library.php';
                     ?>
                 </td>
                 <td><?php echo $d['kategori'] == null ? "Kategori tidak diketahui" : $d['kategori']; ?></td>
-				<td><?php echo $d['username'] == null ? "Pembuat tidak diketahui" : $d['username']; ?></td>
 				<td><?php echo $d['tanggal_dibuat'] == null ? "Tanggal buat tidak diketahui" : $d['tanggal_dibuat']; ?></td>
                 <td style="text-align: center;">
                     <a href="v_detail_postingan.php?id_postingan=<?php echo $d['id_postingan'];?>">
@@ -136,17 +127,11 @@ include '../lib/library.php';
                             <img src="https://img.icons8.com/material-rounded/24/ffffff/view-details.png"/>
 						</button>
                     </a>
-                    <?php
-                        if ($d['id_users'] == 1) {
-                    ?>
                     <a href="v_edit_postingan.php?id_postingan=<?php echo $d['id_postingan']; ?>">
-                        <button class="btn btn-primary btn-masuk" type="submit" name="masuk" value="masuk">
+                        <button class="btn btn-primary btn-masuk" type="submit" data-bs-toggle="modal" data-bs-target="#admineditpost">
                             <img src="https://img.icons8.com/material-rounded/24/ffffff/edit--v1.png"/>
                         </button>
                     </a>
-                    <?php
-                        }
-                    ?>
                     <a href="delete_postingan.php?id_postingan=<?php echo $d['id_postingan'];?>">
                         <button class="btn btn-primary btn-masuk" type="submit" name="masuk" value="masuk">
                             <img src="https://img.icons8.com/material-rounded/24/ffffff/trash.png"/>
@@ -167,17 +152,17 @@ include '../lib/library.php';
         <nav aria-label="table-postingan">
             <ul class="pagination justify-content-center">
                 <li class="page-item">
-                    <a class="page-link" <?php if($halaman > 1){ echo "href='v_admin.php?page=postingan&halaman=$previous'"; } ?>><</a>
+                    <a class="page-link" <?php if($halaman > 1){ echo "href='?page=postingan_pribadi&halaman=$previous'"; } ?>><</a>
                 </li>
                 <?php 
 				for($x=1;$x<=$total_halaman;$x++){
 					?> 
-					<li class="page-item"><a class="page-link" href="v_admin.php?page=postingan&halaman=<?php echo $x ?>"><?php echo $x; ?></a></li>
+					<li class="page-item"><a class="page-link" href="?page=postingan_pribadi&halaman=<?php echo $x ?>"><?php echo $x; ?></a></li>
 					<?php
 				}
 				?>	
                 <li class="page-item">
-                    <a  class="page-link" <?php if($halaman < $total_halaman) { echo "href='v_admin.php?page=postingan&halaman=$next'"; } ?>>></a>
+                    <a  class="page-link" <?php if($halaman < $total_halaman) { echo "href=?page=postingan_pribadi&halaman=$next'"; } ?>>></a>
                 </li>
             </ul>
         </nav>
@@ -206,7 +191,7 @@ include '../lib/library.php';
 
                     
                     <div class="upload">
-                        <label for="file"  class="custom-file form-label">Unggah File/Foto</label>
+                        <label for="file"  class="custom-file form-label">Unggah Foto</label>
                         <input type="file" id="file" name="file"  accept="image/*" onchange="loadFile(event)" class="form-control form-control-sm"></input>
                         <span>*Foto yang diunggah harus berekstensi JPG, JPEG, atau PNG dan berukuran 1MB.</span>
                         <img id="preview" width="100%"/>

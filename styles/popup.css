@@ -1,0 +1,72 @@
+.title{
+    display: flex;
+    justify-content: space-between;
+}
+
+.title h2{
+    color: white;
+}
+
+.table {
+    background-color: white;
+    border: 0px solid #5392bb;
+    margin: 10px 0;
+    border-radius: 20px;
+}
+
+.table th{
+    text-align: center;
+}
+
+.btn-tambah, .btn-tambah::after{
+    margin: 5px;
+    margin-left: 100px;
+    background-color: white;
+    border: 0;
+}
+
+.btn-tambah:hover{
+    background-color: #2A4365;
+}
+
+
+.btn-masuk, .btn-register, .btn-buat{
+    height: 40px;
+    margin: 5px;
+    background-color: #5392bb;
+    border: 0;
+}
+
+.btn-masuk:hover, .btn-register:hover, .btn-buat:hover{
+    background-color: #2A4365;
+}
+
+.line {
+    width: 100%;
+    height: 1px;
+    border-bottom: 1px dashed #c4c4c4;
+    margin: 10px 0;
+}
+
+input[type='text'],
+input[type='email'],
+input[type='number'],
+input[type='date'],
+input[type='password'],
+select,
+textarea {
+    display: block;
+    margin-bottom: 10px;
+    height: 40px;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #222831;
+    padding: 10px;
+    font-family: inherit;
+    background-color: #eee;
+}
+
+
+#deskripsi{
+    height: 150px;
+}

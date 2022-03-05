@@ -1,13 +1,11 @@
 <?php
 include "../lib/library.php";
 
-$user = $_SESSION['id_user'];
-$sql = "SELECT * FROM alumni, users where alumni.id_users = " . $user;
-$data = $mysqli->query($sql) or die($mysqli->error);
-$row = mysqli_fetch_array($data);
-
-$sql1 = "SELECT * FROM users u, postingan p WHERE p.id_users = u.id_user ORDER BY tanggal_dibuat;";
+$sql1 = "SELECT * FROM users u, postingan p WHERE p.id_users = u.id_user ORDER BY p.id_postingan DESC LIMIT 3;";
 $data1 = $mysqli->query($sql1) or die($mysqli->error);
+
+$sql2 = "SELECT * FROM users u, postingan p WHERE p.id_users = u.id_user AND u.level = 'admin' ORDER BY p.id_postingan ASC LIMIT 3;";
+$data2 = $mysqli->query($sql1) or die($mysqli->error);
 ?>
 
 <!DOCTYPE html>
@@ -28,34 +26,19 @@ $data1 = $mysqli->query($sql1) or die($mysqli->error);
 
 <body>
     <div class="welcome">
-        <img src="../assets/wb-waves.png" alt="" class="welcome-img">
-        <img src="https://img.icons8.com/material-rounded/48/000000/student-male.png" id="student" />
-        <h3 style="text-align: center;">
-            <?php if ($row['nama_lengkap'] != null) {
-                echo "Halo, " . $row['nama_lengkap'] . "!";
-            ?>
-        </h3>
-        <<?php echo $row['nama_lengkap'] == null ? "h3" : "h4"; ?> style="text-align: center;">
-            Selamat datang di Pathalum!
-        <?php
-            } else {
-                echo "Selamat datang di Pathalum!";
-                echo nl2br("\nSilakan lengkapi data diri anda di halaman profile!");
-            }
-        ?>
-        <<?php echo $row['nama_lengkap'] == null ? "/h3" : "/h4"; ?> </div>
-
+        <h2>SELAMAT DATANG</h2>
+    </div>
 
             <div class="box-form">
                 <div class="title">
-                    <h1>Postingan</h1>
+                    <h3>Postingan Terbaru</h3>
                 </div>
                 <?php
                 while ($postingan = mysqli_fetch_array($data1)) {
                 ?>
 
                     <div class="card">
-                        <img src="../assets/bg.jpeg" class="card-img-top" alt="Tidak Ada Gambar">
+                        <img src="<?php echo $postingan['photo'] == null ? "../assets/bg.jpeg" : "../uploaded/" . $postingan['photo'];?> ? " class="card-img-top" alt="Tidak Ada Gambar">
                         <div class="card-body">
                             <h5 class="card-title"><?php echo $postingan['judul_postingan'] ?></h5>
                             <p class="card-text">
@@ -63,24 +46,24 @@ $data1 = $mysqli->query($sql1) or die($mysqli->error);
                                 $deskripsi = $postingan['deskripsi'];
                                 if (strlen($deskripsi) > 100) {
                                     echo substr_replace($deskripsi, "...", 100);
+                                } else {
+                                    echo $deskripsi;
                                 }
                                 ?>
                             </p>
-                            <a href="#" class="btn btn-primary btn-link">Read More...</a>
                         </div>
                         <div class="card-footer">
+                        <a href="v_detail_postingan.php?id_postingan=<?php echo $postingan['id_postingan'];?>" class="btn btn-primary btn-link">Read More...</a>
                             <small>Created by: <?php echo $postingan['username']; ?></small>
                             <small>on <?php echo $postingan['tanggal_dibuat']; ?></small>
                         </div>
-                        <!-- <ul class="list-group list-group-flush">
-                            <li class="list-group-item"></li>
-                            <li class="list-group-item"></li>
-                        </ul> -->
                     </div>
 
                 <?php
                 }
                 ?>
+
+                <a style="text-align:center; grid-column-start: 2;"href="?page=postingan">Lihat Postingan Lainnya...</a>
             </div>
 </body>
 

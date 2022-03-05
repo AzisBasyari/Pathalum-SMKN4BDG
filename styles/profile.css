@@ -59,6 +59,7 @@ textarea {
     border: 1px solid #222831;
     padding: 10px;
     font-family: inherit;
+    background-color: #eee;
 }
 
 .btn-update{

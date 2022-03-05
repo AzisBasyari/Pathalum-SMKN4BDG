@@ -14,12 +14,11 @@
 </head>
 
 <body>
-	
-
-	<br/>
+<div class="table-container">
+	<h2>Data Alumni</h2>
 	<table class="table table-bordered">
 		<tr>
-			<th>NO</th>
+			<th>No</th>
 			<th>Nama</th>
 			<th>Jurusan</th>
 			<th>Tahun Masuk</th>
@@ -29,9 +28,22 @@
 		</tr>
 		<?php
         include '../lib/library.php';
+
+		$batas = 10;
+        $halaman = isset($_GET['halaman'])?(int)$_GET['halaman'] : 1;
+        $halaman_awal = ($halaman>1) ? ($halaman * $batas) - $batas : 0;
+
+        $previous = $halaman - 1;
+        $next = $halaman + 1;
+
+        $data = mysqli_query($mysqli,"select * from alumni");
+		$jumlah_data = mysqli_num_rows($data);
+		$total_halaman = ceil($jumlah_data / $batas);
+
+
         $no = 1;
-        $data = mysqli_query($mysqli, "select * from alumni");
-        while ($d = mysqli_fetch_array($data)) {
+        $data_alumni = mysqli_query($mysqli, "select * from alumni LIMIT $halaman_awal, $batas");
+        while ($d = mysqli_fetch_array($data_alumni)) {
             ?>
 			<tr>
 				<td><?php echo $no++; ?></td>
@@ -57,5 +69,26 @@
         }
         ?>
 	</table>
+</div>
+	
+	<div class="container">
+	<nav aria-label="table-postingan">
+            <ul class="pagination justify-content-center">
+                <li class="page-item">
+                    <a class="page-link" <?php if($halaman > 1){ echo "href='v_admin.php?page=data&halaman=$previous'"; } ?>>Previous</a>
+                </li>
+                <?php 
+				for($x=1;$x<=$total_halaman;$x++){
+					?> 
+					<li class="page-item"><a class="page-link" href="v_admin.php?page=data&halaman=<?php echo $x ?>"><?php echo $x; ?></a></li>
+					<?php
+				}
+				?>	
+                <li class="page-item">
+                    <a  class="page-link" <?php if($halaman < $total_halaman) { echo "href='v_admin.php?page=data&halaman=$next'"; } ?>>Next</a>
+                </li>
+            </ul>
+        </nav>
+	</div>
 </body>
 </html>

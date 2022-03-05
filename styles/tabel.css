@@ -1,7 +1,16 @@
+.table-container h2{
+    color: white;
+}
+
 .table {
     background-color: white;
-    border: 1px solid #222831;
-    margin: 0px;
+    border: 0px solid #5392bb;
+    margin: 10px 0;
+    border-radius: 20px;
+}
+
+.table th{
+    text-align: center;
 }
 
 .btn-masuk{

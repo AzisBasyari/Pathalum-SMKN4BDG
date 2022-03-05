@@ -41,18 +41,18 @@
                     </a>
                 </li>
 
-                <li <?php if($page == "postingan") echo "class='active'";?>>
-                    <a href="?page=postingan">
-                        <img src="https://img.icons8.com/material-rounded/24/ffffff/edit--v1.png"/>    
+                <li <?php if($page == "seluruh_postingan") echo "class='active'";?>>
+                    <a href="?page=seluruh_postingan&halaman=1">
+                    <img src="https://img.icons8.com/material-rounded/24/ffffff/rules.png"/>     
                         Postingan
                     </a>
                 </li>
 
 
-                <li <?php if($page == "loker") echo "class='active'";?>>
-                    <a href="?page=loker">
-                        <img src="https://img.icons8.com/material-rounded/24/ffffff/briefcase.png"/>
-                        Lowongan Kerja
+                <li <?php if($page == "postingan") echo "class='active'";?>>
+                    <a href="?page=postingan&halaman=1">
+                        <img src="https://img.icons8.com/material-rounded/24/ffffff/edit--v1.png"/>
+                        Atur Postingan
                     </a>
                 </li>
 
@@ -79,10 +79,10 @@
                     include "v_home_admin.php";
                 } else if ($page == "data"){
                     include "v_data_alumni.php";
-                } else if ($page == "postingan"){
+                } else if ($page == "seluruh_postingan"){
+                    include "v_seluruh_postingan.php";
+                } else if($page == "postingan"){
                     include "v_postingan_admin.php";
-                } else if($page == "loker"){
-                    include "v_loker_admin.php";
                 } else {
                     echo "404 Halaman Tidak Ditemukan";
                 }

@@ -19,6 +19,7 @@
 body {
     font-family: 'Sora', sans-serif;
     background: #5392bb;
+    font-size: 14px;
 }
 
 p {
@@ -85,7 +86,7 @@ a:focus {
 }
 
 #sidebar .sidebar-header {
-    padding: 20px;
+    padding: 2em;
     background: #2D3748;
 }
 
@@ -128,13 +129,17 @@ a.article:hover {
     color: #fff !important;
 }
 
+.btn{
+    font-size: 12px;
+}
+
 /* ---------------------------------------------------
     CONTENT STYLE
 ----------------------------------------------------- */
 
 #content {
-    width: calc(100% - 250px);
-    padding: 40px;
+    width: calc(100% - 20vw);
+    padding: 3vw;
     min-height: 100vh;
     transition: all 0.3s;
     position: absolute;
@@ -150,7 +155,7 @@ a.article:hover {
     MEDIAQUERIES
 ----------------------------------------------------- */
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
     #sidebar {
         margin-left: -250px;
     }

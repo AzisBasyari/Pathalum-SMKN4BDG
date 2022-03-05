@@ -42,9 +42,9 @@ $lulusan = mysqli_fetch_array($data1);
 
 <body>
 
-	<div class="welcome">
-		<img src="../assets/home_admin.jpg" alt="" class="welcome-img">
-	</div>
+<div class="welcome">
+        <h2>SELAMAT DATANG</h2>
+    </div>
 
 	<div class="box">
 		<div class="box-form">
@@ -82,13 +82,13 @@ $lulusan = mysqli_fetch_array($data1);
 	</div>
 
 
-	<div class="container">
+	<div class="container mt-0">
 		<div class="box-form">
-			<canvas id="jurusan" width="500"></canvas>
+			<canvas id="jurusan" width="1000"></canvas>
 		</div>
 		<div class="container"></div>
 		<div class="box-form">
-			<canvas id="lulusan" width="500"></canvas>
+			<canvas id="lulusan" width="1000"></canvas>
 		</div>
 	</div>
 
@@ -162,6 +162,7 @@ $lulusan = mysqli_fetch_array($data1);
 			}],
 		},
 		options: {
+			maintainAspectRation: false,
 			responsive: true,
 			color: '#222831',
 			borderWidth: 0,
