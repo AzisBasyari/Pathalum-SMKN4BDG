@@ -49,7 +49,7 @@ if (isset($_POST['update'])) {
             echo "<meta http-equiv='refresh' content='0'>";
         }
     } else {
-        $sql = "UPDATE `postingan` SET judul_postingan='$judul', deskripsi='$deskripsi', kategori='$kategori', WHERE id_postingan=$id_postingan";
+        $sql = "UPDATE `postingan` SET judul_postingan='$judul', deskripsi='$deskripsi', kategori='$kategori' WHERE id_postingan=$id_postingan";
         $data = $mysqli -> query($sql) or die($mysqli->error);
         echo "<meta http-equiv='refresh' content='0'>";
     }
@@ -119,16 +119,15 @@ if (isset($_POST['update'])) {
         
         <div class="image">
             <span>Foto Saat Ini:</span>
-            <img src="../uploaded/<?php echo $data['photo'];?>" width="100%" alt="" class="uploaded"/>
+            <img src="../uploaded/<?php echo $data['photo'];?>" width="100%" alt="" class="uploaded mb-3"/>
         </div>
 
         <label for="option" id="option-label">
-            <span>Apakah anda ingin mengupdate foto?</span>
-            <select id="option" name="option" onchange="tampilkan()">
-                <option value="Tidak" disabled selected>Pilih opsi</option>
-                <option value="Ya">Ya</option>
-                <option value="Tidak">Tidak</option>
-            </select>
+            <span class="my-5">Apakah anda ingin mengupdate foto?</span>
+           <!-- <span id='file-span' class="mb-5">Unggah Foto</span> -->
+            <input type='file' id='file' name='file' accept='image/*' onchange='loadFile(event)' class='form-control form-control-sm'></input>
+            <span>*Foto yang diunggah harus berekstensi JPG, JPEG, atau PNG dan berukuran 1MB.</span>
+            <img id="preview" width="100%"/>`;
         </label>
 
 
@@ -140,7 +139,7 @@ if (isset($_POST['update'])) {
     </div>
 
     <script>
-        function tampilkan(){
+        /* function tampilkan(){
         var values = document.getElementById("option").value;
         if(values =="Ya"){
             document.getElementById('file-label').innerHTML =
@@ -151,7 +150,7 @@ if (isset($_POST['update'])) {
         } else {
             document.getElementById('file-label').innerHTML= '';
         }
-        }
+        } */
 
         var loadFile = function(event) {
                                 var output = document.getElementById('preview');
