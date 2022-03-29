@@ -48,6 +48,20 @@
     margin: 10px 0;
 }
 
+.btn-link {
+    background-color: #2A4365;
+    border: 0;
+    text-decoration: none;
+    color: #fff;
+    font-size: 0.9em;
+    display: block;
+}
+
+.btn-link:hover {
+    background-color: #222831;
+    color: #fff;
+}
+
 input[type='text'],
 input[type='email'],
 input[type='number'],

@@ -9,7 +9,7 @@ Make sure you have configure "php.ini" file on your xampp folder, search for 'fi
 'On' like this 'file_uploads = On' -->
 <?php
 include '../lib/library.php';
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['posting'])) {
         $judul = $_POST['judul_postingan'];
         $deskripsi = $_POST['deskripsi'];
         $kategori = $_POST['kategori'];
@@ -46,6 +46,27 @@ include '../lib/library.php';
         }
 
     }
+
+    $batas = 5;
+        $halaman = isset($_GET['halaman'])?(int)$_GET['halaman'] : 1;
+        $halaman_awal = ($halaman>1) ? ($halaman * $batas) - $batas : 0;
+
+        $previous = $halaman - 1;
+        $next = $halaman + 1;
+
+        $data = mysqli_query($mysqli,"select * from postingan");
+		$jumlah_data = mysqli_num_rows($data);
+		$total_halaman = ceil($jumlah_data / $batas);
+
+
+        $no = $halaman_awal+1;
+         $sql_data = "SELECT id_postingan, judul_postingan, deskripsi, kategori, tanggal_dibuat, username, id_users FROM users u, postingan p WHERE p.id_users = u.id_user";
+    
+    $search = @$_POST['search'];
+    if (!empty($search)) $sql_data .= " AND judul_postingan LIKE '%$search%'";
+
+    $sql_data .= " ORDER BY p.id_postingan desc LIMIT $halaman_awal, $batas";
+    $data_postingan = $mysqli->query($sql_data);
 ?>
 
 
@@ -89,6 +110,17 @@ include '../lib/library.php';
         </button>
     </div>
 
+    <form action="#" method="post">
+        <div class="col-lg-6 my-3">
+            <h6 class="form-label text-white">Cari berdasarkan judul</h6>            
+            <div class="d-flex">
+                <input type="text" class="form-control me-2" id="search" name="search" placeholder="Masukkan judul">
+                <button type="submit" class="btn btn-primary btn-link me-2">Cari</button>
+                <button type="submit" class="btn btn-primary btn-link">Reset</button>
+            </div>
+        </div>
+        </form>
+
 <table class="table table-bordered">
 		<tr>
 			<th>No</th>
@@ -100,20 +132,7 @@ include '../lib/library.php';
 			<th>Aksi</th>
 		</tr>
 		<?php
-        $batas = 5;
-        $halaman = isset($_GET['halaman'])?(int)$_GET['halaman'] : 1;
-        $halaman_awal = ($halaman>1) ? ($halaman * $batas) - $batas : 0;
-
-        $previous = $halaman - 1;
-        $next = $halaman + 1;
-
-        $data = mysqli_query($mysqli,"select * from postingan");
-		$jumlah_data = mysqli_num_rows($data);
-		$total_halaman = ceil($jumlah_data / $batas);
-
-
-        $no = $halaman_awal+1;;
-        $data_postingan = mysqli_query($mysqli, "SELECT * FROM users u, postingan p WHERE p.id_users = u.id_user LIMIT $halaman_awal, $batas");
+        
         while ($d = mysqli_fetch_array($data_postingan)) {
             ?>
 			<tr>

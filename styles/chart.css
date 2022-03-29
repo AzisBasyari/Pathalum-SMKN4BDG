@@ -19,6 +19,15 @@
     color: #fff;
 }
 
+.shadow-cus{
+    background-color: rgba(0,0,0, 0.4);
+}
+
+.w-cus{
+    height: 35.5vh;
+}
+
+
 .container{
     width: 50%;
     display: flex;

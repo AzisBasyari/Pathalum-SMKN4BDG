@@ -19,6 +19,14 @@
     color: #fff;
 }
 
+.shadow-cus{
+    background-color: rgba(0,0,0, 0.4);
+}
+
+.w-cus{
+    height: 35.5vh;
+}
+
 .title{
     grid-column: 1/4;
     margin-bottom: 50px;

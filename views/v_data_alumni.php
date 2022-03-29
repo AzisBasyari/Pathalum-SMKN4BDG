@@ -1,3 +1,30 @@
+<?php
+	include '../lib/library.php';
+
+	$batas = 10;
+	$halaman = isset($_GET['halaman'])?(int)$_GET['halaman'] : 1;
+	$halaman_awal = ($halaman>1) ? ($halaman * $batas) - $batas : 0;
+
+	$previous = $halaman - 1;
+	$next = $halaman + 1;
+
+	$data = mysqli_query($mysqli,"select * from alumni");
+	$jumlah_data = mysqli_num_rows($data);
+	$total_halaman = ceil($jumlah_data / $batas);
+
+
+	$no = 1;
+	// $data_alumni = mysqli_query($mysqli, "select * from alumni LIMIT $halaman_awal, $batas");
+
+	$sql_data = "select * from alumni";
+    
+    $search = @$_POST['search'];
+    if (!empty($search)) $sql_data .= " WHERE nama_lengkap LIKE '%$search%'";
+
+    $sql_data .= " ORDER BY alumni.id_alumni asc LIMIT $halaman_awal, $batas";
+    $data_alumni = $mysqli->query($sql_data);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,6 +43,18 @@
 <body>
 <div class="table-container">
 	<h2>Data Alumni</h2>
+
+	<form action="#" method="post">
+        <div class="col-lg-6 my-3">
+            <h6 class="form-label text-white">Cari berdasarkan nama</h6>            
+            <div class="d-flex">
+                <input type="text" class="form-control me-2" id="search" name="search" placeholder="Masukkan nama">
+                <button type="submit" class="btn btn-primary btn-link me-2">Cari</button>
+                <button type="submit" class="btn btn-primary btn-link">Reset</button>
+            </div>
+        </div>
+        </form>
+
 	<table class="table table-bordered">
 		<tr>
 			<th>No</th>
@@ -27,22 +66,7 @@
 			<th>Aksi</th>
 		</tr>
 		<?php
-        include '../lib/library.php';
-
-		$batas = 10;
-        $halaman = isset($_GET['halaman'])?(int)$_GET['halaman'] : 1;
-        $halaman_awal = ($halaman>1) ? ($halaman * $batas) - $batas : 0;
-
-        $previous = $halaman - 1;
-        $next = $halaman + 1;
-
-        $data = mysqli_query($mysqli,"select * from alumni");
-		$jumlah_data = mysqli_num_rows($data);
-		$total_halaman = ceil($jumlah_data / $batas);
-
-
-        $no = 1;
-        $data_alumni = mysqli_query($mysqli, "select * from alumni LIMIT $halaman_awal, $batas");
+        
         while ($d = mysqli_fetch_array($data_alumni)) {
             ?>
 			<tr>
